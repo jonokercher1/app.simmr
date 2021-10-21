@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import { Text } from 'react-native';
 import AppScreen from '../../components/AppScreen/AppScreen';
 
-const LoginScreen: FC = () => (
+const RegisterScreen: FC = () => (
   <AppScreen>
-    <Text>Login</Text>
+    <Text>Register</Text>
   </AppScreen>
 );
 
-export default LoginScreen;
+export default RegisterScreen;

@@ -8,9 +8,16 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { AuthContext, AuthProvider } from './src/contexts/AuthContext/AuthContext';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './src/screens/LoginScreen/LoginScreen';
-import HomeScreen from './src/screens/HomeScreen/HomeScreen';
+import RegisterScreen from './src/screens/RegisterScreen/RegisterScreen';
+import AuthenticatedApp from './src/screens/AuthenticatedApp/AuthenticatedApp';
 
-const Stack = createStackNavigator();
+export type MainTabsParamList = {
+  authenticatedApp: undefined;
+  login: undefined;
+  register: undefined;
+};
+
+const RootStack = createStackNavigator<MainTabsParamList>();
 const queryClient = new QueryClient();
 
 const App: FC = () => {
@@ -22,19 +29,25 @@ const App: FC = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        {authContext.user ? (
-          <Stack.Screen
-            name="home"
-            component={HomeScreen}
+      <RootStack.Navigator>
+        {!authContext.user ? (
+          <RootStack.Screen
+            name="authenticatedApp"
+            component={AuthenticatedApp}
           />
         ) : (
-          <Stack.Screen
-            name="login"
-            component={LoginScreen}
-          />
+          <>
+            <RootStack.Screen
+              name="login"
+              component={LoginScreen}
+            />
+            <RootStack.Screen
+              name="register"
+              component={RegisterScreen}
+            />
+          </>
         )}
-      </Stack.Navigator>
+      </RootStack.Navigator>
 
       <ToastManager />
     </NavigationContainer>
