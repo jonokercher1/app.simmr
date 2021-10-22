@@ -1,16 +1,26 @@
-import React, { FC } from 'react';
-import { TextInput, TextInputProps, View, Text } from 'react-native';
+import React, { FC, useState, useEffect } from 'react';
+import { TextInput, TextInputProps, View, Text, TouchableOpacity } from 'react-native';
 import { Control, Controller, FieldError } from 'react-hook-form';
+import Icon from 'react-native-remix-icon';
+import styles from './Input.style';
+import { COLOUR } from '../../utils/GlobalStyles/GlobalStyles';
 
 interface InputProps extends TextInputProps {
   control: Control<any>;
   name: string;
   error?: FieldError;
   rules?: any;
-  label?: string;
 }
 
-const Input: FC<InputProps> = ({ control, name, rules, error, label, ...props }) => {
+const Input: FC<InputProps> = ({ control, name, rules, error, ...props }) => {
+  const [showValue, setShowValue] = useState(true);
+
+  useEffect(() => {
+    if (props.secureTextEntry) {
+      setShowValue(false);
+    }
+  }, [props.secureTextEntry]);
+
   return (
     <Controller
       control={control}
@@ -19,15 +29,30 @@ const Input: FC<InputProps> = ({ control, name, rules, error, label, ...props })
       defaultValue={props.defaultValue}
       render={({ field: { onChange, value } }) => (
         <View>
-          {label && <Text>{label}</Text>}
-
           <TextInput
             onChangeText={onChange}
             value={value}
+            style={[styles.input, props.secureTextEntry && styles.secureInput]}
+            placeholderTextColor={COLOUR.NEUTRAL_DARK}
             {...props}
+            secureTextEntry={showValue}
           />
 
-          {error && <Text>{error.message}</Text>}
+          {props.secureTextEntry && (
+            <View style={styles.secureToggle}>
+              <TouchableOpacity onPress={() => setShowValue(!showValue)}>
+                <Icon
+                  name={showValue ? 'eye-line' : 'eye-off-line'}
+                  color={COLOUR.DARK}
+                  size={20}
+                />
+              </TouchableOpacity>
+            </View>
+          )}
+
+          {error && (
+            <Text style={styles.error}>{error.message}</Text>
+          )}
         </View>
       )}
     />

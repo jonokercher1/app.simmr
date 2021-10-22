@@ -18,7 +18,7 @@ export enum COLOUR {
 
 export enum FONT_SIZE {
   HEADING = 36,
-  BODY = 18
+  BODY = 16
 }
 
 export const AppTheme: Theme = {
