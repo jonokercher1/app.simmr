@@ -10,6 +10,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './src/screens/LoginScreen/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen/RegisterScreen';
 import AuthenticatedApp from './src/screens/AuthenticatedApp/AuthenticatedApp';
+import { AppTheme } from './src/utils/GlobalStyles/GlobalStyles';
 
 export type MainTabsParamList = {
   authenticatedApp: undefined;
@@ -28,8 +29,12 @@ const App: FC = () => {
   }
 
   return (
-    <NavigationContainer>
-      <RootStack.Navigator>
+    <NavigationContainer theme={AppTheme}>
+      <RootStack.Navigator
+        screenOptions={{
+          headerShown: false,
+         }}
+      >
         {!authContext.user ? (
           <RootStack.Screen
             name="authenticatedApp"

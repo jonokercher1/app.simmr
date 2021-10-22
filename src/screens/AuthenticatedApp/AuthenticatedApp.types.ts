@@ -3,6 +3,7 @@ export type MainTabsParamList = {
   list: undefined;
   collaborators: undefined;
   profile: undefined;
+  shoppingTripHolder: undefined;
 }
 
 export type AuthStackParamList = {
