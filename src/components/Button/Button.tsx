@@ -1,17 +1,32 @@
 import React, { FC } from 'react';
-import { Button as NativeButton, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import styles from './Button.style';
+import Body from '../Typography/Body/Body';
 
-const Button: FC = () => {
-  const onPress = () => {
-    console.log('clicked');
-  };
+interface ButtonProps {
+  state: 'PRIMARY' | 'SECONDARY';
+  onPress: () => void;
+  buttonText: string;
+  loading?: boolean;
+  disabled?: boolean;
+}
 
-  return (
-    <View style={styles.wrap}>
-      <NativeButton onPress={onPress} title="hello world" />
-    </View>
-  );
-};
+const Button: FC<ButtonProps> = ({ state, onPress, buttonText, loading, disabled }) => (
+  <TouchableOpacity
+    onPress={onPress}
+    disabled={disabled}
+    style={[styles.button, (styles as any)[state.toLowerCase()]]}
+  >
+    {loading && <Body>loading...</Body>}
+    <Body
+      style={[
+        styles.buttonText,
+        state === 'SECONDARY' && styles.buttonSecondaryText,
+      ]}
+    >
+      {buttonText}
+    </Body>
+  </TouchableOpacity>
+);
 
 export default Button;

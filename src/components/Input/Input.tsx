@@ -6,13 +6,14 @@ import styles from './Input.style';
 import { COLOUR } from '../../utils/GlobalStyles/GlobalStyles';
 
 interface InputProps extends TextInputProps {
+  styleType?: 'FULL' | 'MINIMAL';
   control: Control<any>;
   name: string;
   error?: FieldError;
   rules?: any;
 }
 
-const Input: FC<InputProps> = ({ control, name, rules, error, ...props }) => {
+const Input: FC<InputProps> = ({ control, name, rules, error, styleType, ...props }) => {
   const [showValue, setShowValue] = useState(true);
 
   useEffect(() => {
@@ -32,17 +33,23 @@ const Input: FC<InputProps> = ({ control, name, rules, error, ...props }) => {
           <TextInput
             onChangeText={onChange}
             value={value}
-            style={[styles.input, props.secureTextEntry && styles.secureInput]}
+            style={[
+              styles.input,
+              styleType === 'MINIMAL' && styles.minimalInput,
+              props.secureTextEntry && styles.secureInput,
+            ]}
             placeholderTextColor={COLOUR.NEUTRAL_DARK}
             {...props}
-            secureTextEntry={showValue}
+            autoCapitalize="none"
+            placeholder={props?.placeholder?.toLowerCase()}
+            secureTextEntry={!showValue}
           />
 
           {props.secureTextEntry && (
             <View style={styles.secureToggle}>
               <TouchableOpacity onPress={() => setShowValue(!showValue)}>
                 <Icon
-                  name={showValue ? 'eye-line' : 'eye-off-line'}
+                  name={showValue ? 'eye-off-line' : 'eye-line'}
                   color={COLOUR.DARK}
                   size={20}
                 />

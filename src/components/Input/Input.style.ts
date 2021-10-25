@@ -8,6 +8,12 @@ export default StyleSheet.create({
     paddingVertical: 18,
     paddingHorizontal: 18,
     fontSize: FONT_SIZE.BODY,
+    fontFamily: 'RedHatDisplay-Regular',
+  },
+  minimalInput: {
+    backgroundColor: 'transparent',
+    paddingVertical: 6,
+    paddingHorizontal: 0,
   },
   secureInput: {
     paddingRight: 60,

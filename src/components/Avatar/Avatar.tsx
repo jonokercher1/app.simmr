@@ -1,7 +1,7 @@
 import React, { FC, useMemo } from 'react';
 import { View } from 'react-native';
 import AvatarGenerator from 'react-native-boring-avatars';
-import styles from './Avatar.style';
+import styles, { AVATAR_LARGE_HEIGHT, AVATAR_SMALL_HEIGHT } from './Avatar.style';
 
 interface AvatarProps {
   size: 'SMALL' | 'LARGE';
@@ -9,9 +9,6 @@ interface AvatarProps {
 }
 
 const colours = ['#92A1C6', '#146A7C', '#F0AB3D', '#C271B4', '#C20D90'];
-
-export const AVATAR_SMALL_HEIGHT = 35;
-export const AVATAR_LARGE_HEIGHT = 60;
 
 const Avatar: FC<AvatarProps> = ({ size, name }) => {
   const avatarHeight = useMemo(() => {

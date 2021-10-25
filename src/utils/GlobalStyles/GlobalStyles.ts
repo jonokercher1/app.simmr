@@ -17,8 +17,10 @@ export enum COLOUR {
 }
 
 export enum FONT_SIZE {
-  HEADING = 36,
-  BODY = 16
+  HEADING = 30,
+  SUB_HEADING = 22,
+  BODY = 16,
+  SUB_TEXT = 12
 }
 
 export const AppTheme: Theme = {
@@ -33,7 +35,7 @@ export class ShadowGenerator {
   static defaultShadow() {
     return {
       shadowColor: COLOUR.NEUTRAL_DARK,
-    shadowOffset: {
+      shadowOffset: {
         width: 0,
         height: 3,
       },

@@ -20,6 +20,22 @@ storiesOf('Input', module)
 
     return <TestStory />;
   })
+  .add('Text - Minimal', () => {
+    const TestStory = () => {
+      const { control } = useForm();
+      return (
+        <Input
+          styleType="MINIMAL"
+          placeholder="Input Placeholder"
+          name="input"
+          control={control}
+          onChangeText={action('text changed')}
+        />
+      );
+    };
+
+    return <TestStory />;
+  })
   .add('Text - Error', () => {
     const TestStory = () => {
       const { control } = useForm();
